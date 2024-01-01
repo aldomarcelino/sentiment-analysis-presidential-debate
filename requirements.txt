@@ -1,0 +1,7 @@
+streamlit
+pandas
+plost
+TensorFlow
+transformers
+googletrans==4.0.0-rc1
+matplotlib
