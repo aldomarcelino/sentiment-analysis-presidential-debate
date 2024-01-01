@@ -44,25 +44,26 @@ def check_output(output, result):
 
 def check_side(sentence):
     candidate = {
-        'anies_side': ['anies', 'baswedan', 'pks', 'muhaimin', 'imin', 'amin', 'nomor 1'],
-        'prabowo_side': ['prabowo', 'subianto', 'gibran', 'rakabumi', 'gerindra', 'nomor 2'],
-        'ganjar_side': ['ganjar', 'pranowo', 'mahduf', 'mahfud md', 'pdi', 'pdi perjuangan', 'nomor 3'],
+        'anies_side': ['anies', 'baswedan', 'pks', 'muhaimin', 'imin', 'amin', 'nomor 1', 'cak', 'anis', 'nomor satu'],
+        'prabowo_side': ['prabowo', 'subianto', 'gibran', 'rakabumi', 'gerindra', 'nomor 2', 'nomor dua'],
+        'ganjar_side': ['ganjar', 'pranowo', 'mahduf', 'mahfud md', 'pdi', 'pdi perjuangan', 'nomor 3', 'mega', 'mega chan', 'nomor tiga'],
     }
 
     number = 0
-    result = 0
+    res = 0
 
     for key in candidate:
         number += 1
         is_include = any(keyword in sentence.lower() for keyword in candidate[key])
         if is_include:
-            result = number
+            res = number
             break
 
-    return result
+    return res
 
 
 col1, col2, col3 = st.columns([2,6,2])
+result = 0
 
 with col1:
     st.write(' ')
@@ -79,10 +80,33 @@ with col2:
             if temp:
                 check_output(temp[0]['label'], result)
                 score_formatted = '{:.2f}'.format(temp[0]['score'] * 100)
-                st.write('Score:', float(score_formatted), '%')
+                st.write('Score:', score_formatted, '%')
 
 with col3:
     st.write(' ')
+
+
+
+wrap1, wrap2, wrap3 = st.columns([2,6,2])
+
+with wrap1:
+    st.write(' ')
+
+with wrap2:
+    if(result):
+        the_image = ""
+        if(result == 1):
+            the_image = "pks.png"
+        elif(result == 2):
+            the_image = "gerindra.png"
+        elif(result == 3):
+            the_image = "pdi.png"
+
+        st.image(the_image,width=220)
+
+with wrap3:
+    st.write(' ')
+
 
 
 st.markdown('### Summary')
